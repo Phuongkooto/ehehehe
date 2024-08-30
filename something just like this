@@ -1,82 +1,93 @@
+
+package Arrayyy;
+
 import java.util.Scanner;
-import java.util.ArrayList;
 
-public class ArrayOperations {
-    // Method nhập mảng số thực
-    public static float[] importData(float[] arrays) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Nhap so phan tu cua mang: ");
-        int n = scanner.nextInt();
-        arrays = new float[n];
-        for (int i = 0; i < n; i++) {
-            System.out.print("Nhap phan tu thu  " + (i + 1) + ": ");
-            arrays[i] = scanner.nextFloat();
+
+public class THE_LIEMS_CODE_BAI_KHO {
+    
+    
+    
+     public static float[] importData() {
+         
+    Scanner XiCan = new Scanner(System.in);
+    System.out.print("Ban muon co bao nhieu so phan tu trong mang nay`:");
+    int n = XiCan.nextInt();
+    
+    float[] arrays = new float[n];
+    
+    for ( int i = 0; i < n ; i++ ){
+            System.out.println(" Nhap vao phan tu " + ( i +1) + ": ");
+            arrays[i] = XiCan.nextFloat();          
         }
-        return arrays;
-    }
-
-    // Method xuất mảng ra màn hình
-    public static void printData(float[] arrays) {
-        System.out.print("Mang: ");
-        for (int i = 0; i < arrays.length; i++) {
-            System.out.print(arrays[i] + " ");
-        }
-        System.out.println();
-    }
-
-    // Method tìm giá trị phần tử lớn thứ 2 trong mảng
-    public static float findMax2(float[] arrays) {
+    return arrays;
+  
+}
+     
+     public static void printData(float[ ] arrays) {
+         System.out.print("Cac phan tu trong mang la: ");
+         for ( int i = 0; i < arrays.length ; i++){
+             System.out.print( arrays[i]  + " ");
+         }
+     }
+     
+        public static void findMax2(float[] arrays) {
         if (arrays.length < 2) {
-            System.out.println("Mang co 1 2 cai phan tu ma tim thu 2 lam j?????");
-            return Float.MIN_VALUE;
+            System.out.println("Mang phai co it nhat 2 phan tu.");
+            return;
         }
-        float max1 = Float.MIN_VALUE;
-        float max2 = Float.MIN_VALUE;
+
+        float max = 0;
+        float secondMax = 0;
+
         for (int i = 0; i < arrays.length; i++) {
-            if (arrays[i] > max1) {
-                max2 = max1;
-                max1 = arrays[i];
-            } else if (arrays[i] > max2 && arrays[i] != max1) {
-                max2 = arrays[i];
+            if (arrays[i] > max) {
+                secondMax = max;
+                max = arrays[i];
+            } else if (arrays[i] > secondMax && arrays[i] < max) {
+                secondMax = arrays[i];
             }
         }
-        return max2;
-    }
 
-    // Method xóa các phần tử lẻ ra khỏi mảng
-    public static float[] deleteOddNumber(float[] arrays) {
-        ArrayList<Float> evenNumbers = new ArrayList<>();
-        for (int i = 0; i < arrays.length; i++) {
-            if (arrays[i] % 2 == 0) {
-                evenNumbers.add(arrays[i]);
-            }
+        if (secondMax == Float.NEGATIVE_INFINITY) {
+            System.out.println("Khong co phan tu lon thu 2.");
+        } else {
+            System.out.println("Phan tu lon thu 2 la: " + secondMax);
         }
-        // Chuyển đổi ArrayList về mảng float[]
-        float[] result = new float[evenNumbers.size()];
-        for (int i = 0; i < evenNumbers.size(); i++) {
-            result[i] = evenNumbers.get(i);
-        }
-        return result;
     }
-
-    public static void main(String[] args) {
-        float[] arrays = new float[0];
-
-        // Nhập mảng số thực
-        arrays = importData(arrays);
+     
         
-        // Xuất mảng ra màn hình
-        printData(arrays);
-
-        // Tìm giá trị lớn thứ 2
-        float secondLargest = findMax2(arrays);
-        if (secondLargest != Float.MIN_VALUE) {
-            System.out.println("Phan tu lon thu 2 trong mang la: " + secondLargest);
+        public static void deleteOddNumber(float[] arrays) {
+    
+    int dem = 0;
+    for (int i = 0; i < arrays.length; i++) {
+        if (arrays[i] % 2 == 0) {
+            dem++;
         }
+    }
 
-        // Xóa các phần tử lẻ và xuất mảng sau khi xóa
-        arrays = deleteOddNumber(arrays);
-        System.out.println("Mang sau khi xoa cac phan tu le:");
-        printData(arrays);
+    
+    float[] anotherArray = new float[dem];
+    int chon = 0;
+    for (int i = 0; i < arrays.length; i++) {
+        if (arrays[i] % 2 == 0) {
+            anotherArray[chon++] = arrays[i];
+        }
+    }
+
+  
+    System.out.print("Cac phan tu chan trong mang la: ");
+    for (int i = 0; i < anotherArray.length; i++) {
+        System.out.print(anotherArray[i] + " ");
+    }
+    System.out.println();
+}
+
+        public static void main(String[] args) {
+         float[] ehe = importData();
+         printData(ehe);
+            System.out.println();
+            findMax2(ehe);
+            deleteOddNumber(ehe);
     }
 }
